@@ -1,0 +1,10 @@
+black
+django
+djangorestframework
+django-environ
+psycopg2-binary
+pytest-cov
+pytest-django
+model-bakery
+boto3
+django-storages

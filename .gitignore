@@ -1,0 +1,17 @@
+*.html.py
+*.ipynb
+*.mo
+.bak
+.cache/
+.coverage*
+.dockerignore
+.env
+.idea/
+.pytest_cache/
+__pycache__
+aux/
+res/
+src/celerybeat-schedule
+src/celerybeat.pid
+src/htmlcov/
+local_folder/
