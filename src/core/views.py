@@ -15,15 +15,15 @@ class DebugAPI(views.APIView):
         #     s3.download_fileobj('work-sample-mk', '2021/04/events.csv', f)
         #     print(f)
 
-        BUCKET_NAME = 'work-sample-mk'  # replace with your bucket name
-        KEY = '2021/04/events.csv'  # replace with your object key
+        BUCKET_NAME = "work-sample-mk"  # replace with your bucket name
+        KEY = "2021/04/events.csv"  # replace with your object key
 
-        s3 = boto3.resource('s3', config=Config(signature_version=botocore.UNSIGNED))
+        s3 = boto3.resource("s3", config=Config(signature_version=botocore.UNSIGNED))
 
         try:
-            s3.Bucket(BUCKET_NAME).download_file(KEY, 'truc')
+            s3.Bucket(BUCKET_NAME).download_file(KEY, "truc")
         except botocore.exceptions.ClientError as e:
-            if e.response['Error']['Code'] == "404":
+            if e.response["Error"]["Code"] == "404":
                 print("The object does not exist.")
             else:
                 raise

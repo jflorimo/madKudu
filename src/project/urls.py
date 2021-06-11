@@ -21,6 +21,4 @@ api = [
     path("", include("core.urls")),
 ]
 
-urlpatterns = [
-    path('admin/', admin.site.urls), path("api/", include(api))
-]
+urlpatterns = [path("admin/", admin.site.urls), path("api/", include(api))]
