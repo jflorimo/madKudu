@@ -68,3 +68,22 @@ services:
     env_file:
       - ../.env
 
+  flower:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: celery -A project flower
+    ports:
+      - "5555:5555"
+    volumes:
+      - ../:/app/
+    depends_on:
+      - django
+      - postgres
+      - redis
+      - rabbitmq
+      - beat
+      - worker
+    env_file:
+      - ../.env
