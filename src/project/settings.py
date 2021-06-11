@@ -130,3 +130,7 @@ STATIC_ROOT = str(f"{BASE_DIR}/static")
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Celery
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND")

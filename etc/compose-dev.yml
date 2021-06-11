@@ -1,6 +1,18 @@
 version: '2'
 
 services:
+  rabbitmq:
+    restart: unless-stopped
+    image: rabbitmq:3.8.17
+    env_file:
+      - ../.env
+
+  redis:
+    restart: unless-stopped
+    image: redis:6.2.4
+    env_file:
+          - ../.env
+
   postgres:
     restart: unless-stopped
     image: postgres:13.3-alpine
@@ -22,3 +34,37 @@ services:
       - "postgres:db"
     env_file:
       - ../.env
+
+  beat:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: celery -A project beat -l info
+    volumes:
+      - ../:/app/
+    depends_on:
+      - django
+      - postgres
+      - redis
+      - rabbitmq
+    env_file:
+      - ../.env
+
+  worker:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command: celery -A project worker -l info --pool=solo
+    volumes:
+      - ../:/app/
+    depends_on:
+      - django
+      - postgres
+      - redis
+      - rabbitmq
+      - beat
+    env_file:
+      - ../.env
+

@@ -8,3 +8,6 @@ pytest-django
 model-bakery
 boto3
 django-storages
+celery
+flower
+redis
